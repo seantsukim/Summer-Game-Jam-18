@@ -8,8 +8,7 @@ public class Vent : MonoBehaviour
 
     void MoveToPartnerVent()
     {
-        //GameObject player = GameObject.FindWithTag("Player");
-        //player.transform.position = partnerVent.transform.position;
+        //Figure out how to pan camera
         GameObject.FindWithTag("Player").transform.position = partnerVent.transform.position;
     }
 }
