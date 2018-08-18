@@ -27,7 +27,7 @@ public class Vent : MonoBehaviour
         Vector3 playerPos = GameObject.FindWithTag("Player").transform.position;
 
         //Checks if the wall of doom has passed the partner vent
-        if (wallOfDoom.transform.position.x < partnerVent.transform.position.x)
+        if (wallOfDoom == null || wallOfDoom.transform.position.x < partnerVent.transform.position.x)
         {
             StartCoroutine(PanCameraBetweenPositions(gameObject.transform.position, partnerVent.transform.position));
         }

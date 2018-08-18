@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class WallofDoom : MonoBehaviour
 {
@@ -18,7 +19,9 @@ public class WallofDoom : MonoBehaviour
         //Detect if it collided with Player
         if (target.tag == "Player")
         {
-            Debug.Log("Collided");
+            //Debug.Log("Collided");
+            //Player "death" scene
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
     }
 }
