@@ -13,6 +13,7 @@ public class LevelEnd : MonoBehaviour
             {
                 GameObject.FindWithTag("WallOfDoom").active = false;
             }
+            //Do level end sequence
             Debug.Log("Level End Sequence");
         }
     }
