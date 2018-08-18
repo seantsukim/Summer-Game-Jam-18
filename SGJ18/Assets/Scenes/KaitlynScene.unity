@@ -396,6 +396,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partnerVent: {fileID: 1232975932}
+  playerSprites: []
+  playerColliders: []
 --- !u!1 &825971232
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,7 +411,7 @@ GameObject:
   - component: {fileID: 825971235}
   - component: {fileID: 825971237}
   m_Layer: 0
-  m_Name: WallofDoom
+  m_Name: WallOfDoom
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -518,7 +520,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 4
+  m_Constraints: 6
 --- !u!114 &825971237
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -865,6 +867,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   partnerVent: {fileID: 481252690}
+  playerSprites: []
+  playerColliders: []
 --- !u!114 &1232975934
 MonoBehaviour:
   m_ObjectHideFlags: 0

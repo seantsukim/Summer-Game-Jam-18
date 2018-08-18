@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class WallofDoom : MonoBehaviour
 {
-    public float wallVelocity;
-    Rigidbody2D rb;
+    public float wallVelocity;  //speed the wall moves right
+    Rigidbody2D rb; //wall's rigidbody2D
 
     void Start()
     {
@@ -13,9 +13,12 @@ public class WallofDoom : MonoBehaviour
         rb.velocity = new Vector2(wallVelocity, 0);
     }
 
-    void OnTriggerEnter2D()
+    void OnTriggerEnter2D(Collider2D target)
     {
         //Detect if it collided with Player
-        Debug.Log("Collided");
+        if (target.tag == "Player")
+        {
+            Debug.Log("Collided");
+        }
     }
 }

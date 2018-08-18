@@ -27,7 +27,8 @@ public class Interactable : MonoBehaviour
         if (target.tag == "Player")
         {
             inRange = true;
-            Debug.Log("Entering radius of " + gameObject.name);
+            //Debug.Log("Entering radius of " + gameObject.name);
+            //Have Key Prompt appear
         }
     }
 
@@ -37,7 +38,8 @@ public class Interactable : MonoBehaviour
         if (target.tag == "Player")
         {
             inRange = false;
-            Debug.Log("Exiting radius" + gameObject.name);
+            //Debug.Log("Exiting radius" + gameObject.name);
+            //Have Key prompt disappear
         }
     }
 }

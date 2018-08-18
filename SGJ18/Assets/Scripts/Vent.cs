@@ -8,31 +8,72 @@ public class Vent : MonoBehaviour
 
     private IEnumerator coroutine;
 
-    void MoveToPartnerVent()
-    {
-        //Figure out how to pan camera
-        //GameObject.FindWithTag("Player").transform.position = partnerVent.transform.position;
+    public Component[] playerSprites;
+    public Component[] playerColliders;
 
-        Vector3 playerPos = GameObject.FindWithTag("Player").transform.position;
-        //coroutine = PanCameraBetweenPositions(p.transform.position, partnerVent.transform.position);
-        // StartCoroutine("coroutine");
-        StartCoroutine(PanCameraBetweenPositions(playerPos, partnerVent.transform.position));
+    GameObject wallOfDoom;
+
+    void Start()
+    {
+        GameObject p = GameObject.FindWithTag("Player");
+        playerSprites = p.GetComponentsInChildren<SpriteRenderer>();
+        playerColliders = p.GetComponentsInChildren<BoxCollider2D>();
+
+        wallOfDoom = GameObject.Find("WallOfDoom");
     }
 
+    void MoveToPartnerVent()
+    {
+        Vector3 playerPos = GameObject.FindWithTag("Player").transform.position;
+
+        //Checks if the wall of doom has passed the partner vent
+        if (wallOfDoom.transform.position.x < partnerVent.transform.position.x)
+        {
+            StartCoroutine(PanCameraBetweenPositions(gameObject.transform.position, partnerVent.transform.position));
+        }
+        else
+        {
+            Debug.Log("Wall of doom too far");
+        }
+    }
+
+    //Pans the camera between the two vents
     IEnumerator PanCameraBetweenPositions(Vector3 start, Vector3 finish)
     {
         GameObject p = GameObject.FindWithTag("Player");
-        //p.active = false;
+
+        //set stuff on player to inactive - avoid accidental collisions, etc.
+        foreach (SpriteRenderer s in playerSprites)
+        {
+            s.enabled = false;
+        }
+        foreach (BoxCollider2D b in playerColliders)
+        {
+            b.enabled = false;
+        }
+
+        //Pans the camera between the two vents
         float distance = Vector3.Distance(start, finish);
-        int i = 0;
+        float i = 0F;
+
         while (i < distance)
         {
-            yield return new WaitForSeconds(0.05F);
+            yield return new WaitForSeconds(0.0125F);
             float percent = i / distance; 
             p.transform.position = Vector3.Lerp(start, finish, percent) + new Vector3(0, 0, -10);
-            i++;
+            i += 0.25F;
         }
-        //p.active = true;
+
+        //set stuff on player active
+        foreach (SpriteRenderer s in playerSprites)
+        {
+            s.enabled = true;
+        }
+        foreach (BoxCollider2D b in playerColliders)
+        {
+            b.enabled = true;
+        }
+
         p.transform.position = partnerVent.transform.position;
     }
 }
