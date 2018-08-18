@@ -5,14 +5,15 @@ using UnityEngine;
 public class Interactable : MonoBehaviour
 {
     public KeyCode keyTrigger;
-    //public string className;
-    public string methodName;
+
+    public string methodName;  //Name of the method the interactable object will call
+    //Can be in a different script, but must be script on the same object
 
     bool inRange = false;
 
     void Update()
     {
-        if (Input.GetKeyDown(keyTrigger) && inRange)
+        if (inRange && Input.GetKeyDown(keyTrigger))
         {
             //Perform task
             Debug.Log(keyTrigger + " pressed");
@@ -20,17 +21,23 @@ public class Interactable : MonoBehaviour
         }
     }
 
-    void OnTriggerEnter2D()
+    void OnTriggerEnter2D(Collider2D target)
     {
         //Detect if player
-        inRange = true;
-        Debug.Log("Entering radius of " + gameObject.name);
+        if (target.tag == "Player")
+        {
+            inRange = true;
+            Debug.Log("Entering radius of " + gameObject.name);
+        }
     }
 
-    void OnTriggerExit2D()
+    void OnTriggerExit2D(Collider2D target)
     {
         //Detect if player
-        inRange = false;
-        Debug.Log("Exiting radius" + gameObject.name);
+        if (target.tag == "Player")
+        {
+            inRange = false;
+            Debug.Log("Exiting radius" + gameObject.name);
+        }
     }
 }
