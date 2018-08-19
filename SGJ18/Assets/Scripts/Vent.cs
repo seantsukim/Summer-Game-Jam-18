@@ -59,8 +59,8 @@ public class Vent : MonoBehaviour
         while (i < distance)
         {
             yield return new WaitForSeconds(0.0125F);
-            float percent = i / distance; 
-            p.transform.position = Vector3.Lerp(start, finish, percent) + new Vector3(0, 0, -10);
+            float percent = i / distance;
+            p.transform.position = Vector3.Lerp(start, finish, percent);// + new Vector3(0, 0, -10);
             i += 0.25F;
         }
 
