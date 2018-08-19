@@ -13,29 +13,26 @@ public class DepthScalerDataEditor : Editor
     void OnEnable()
     {
         depthScalerData = target as DepthScalerData;
-
-        float frontPlaneWorldHeight = Camera.main.ScreenToWorldPoint(new Vector3(0f, depthScalerData.frontPlanePixelHeight, 0f)).y;
-        float backPlaneWorldHeight = Camera.main.ScreenToWorldPoint(new Vector3(0f, depthScalerData.backPlanePixelHeight, 0f)).y;
         float worldLeft = Camera.main.ScreenToWorldPoint(Vector3.zero).x;
         float worldRight = Camera.main.ScreenToWorldPoint(new Vector3(Camera.main.pixelWidth, 0f, 0f)).x;
 
         line1Point1.x = worldLeft;
-        line1Point1.y = frontPlaneWorldHeight;
+        line1Point1.y = depthScalerData.frontPlaneWorldY;
         line1Point1.z = 0f;
         line1Point2.x = worldRight;
-        line1Point2.y = frontPlaneWorldHeight;
+        line1Point2.y = depthScalerData.frontPlaneWorldY;
         line1Point2.z = 0f;
         line1Midpoint.x = (line1Point1.x + line1Point2.x) / 2f;
-        line1Midpoint.y = frontPlaneWorldHeight;
+        line1Midpoint.y = depthScalerData.frontPlaneWorldY;
         line1Midpoint.z = 0f;
         line2Point1.x = worldLeft;
-        line2Point1.y = backPlaneWorldHeight;
+        line2Point1.y = depthScalerData.backPlaneWorldY;
         line2Point1.z = 0f;
         line2Point2.x = worldRight;
-        line2Point2.y = backPlaneWorldHeight;
+        line2Point2.y = depthScalerData.backPlaneWorldY;
         line2Point2.z = 0f;
         line2Midpoint.x = (line2Point1.x + line2Point2.x) / 2f;
-        line2Midpoint.y = backPlaneWorldHeight;
+        line2Midpoint.y = depthScalerData.backPlaneWorldY;
         line2Midpoint.z = 0f;
 
         SceneView.onSceneGUIDelegate += OnSceneGUI;
@@ -60,7 +57,7 @@ public class DepthScalerDataEditor : Editor
             line1Point2.y = line1Midpoint.y;
 
             Undo.RecordObject(depthScalerData, "Move front plane pixel height");
-            depthScalerData.frontPlanePixelHeight = Camera.main.WorldToScreenPoint(line1Midpoint).y;
+            depthScalerData.frontPlaneWorldY = line1Midpoint.y;
         }
 
         Handles.DrawLine(line2Point1, line2Point2);
@@ -72,7 +69,7 @@ public class DepthScalerDataEditor : Editor
             line2Point2.y = line2Midpoint.y;
 
             Undo.RecordObject(depthScalerData, "Move back plane pixel height");
-            depthScalerData.backPlanePixelHeight = Camera.main.WorldToScreenPoint(line2Midpoint).y;
+            depthScalerData.backPlaneWorldY = line2Midpoint.y;
         }
 
         Handles.color = originalColor;

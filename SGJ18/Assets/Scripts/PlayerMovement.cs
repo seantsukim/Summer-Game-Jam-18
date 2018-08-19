@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(SpriteRenderer))]
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed;
+    public float rotateSpeed;
+    public float moveSpeed;
     public enum MovementMode
     {
         DISCRETE,
@@ -16,11 +18,12 @@ public class PlayerMovement : MonoBehaviour
     public AnimationCurve jumpCurve;
     public float jumpDuration;
 
-    public GameObject shadowObj;
+    private List<GameObject> shadowObjs;
+
+    private SpriteRenderer spriteRenderer;
 
     private Rigidbody2D rb2D;
     private Vector2 prevVelocity;
-
     private Vector2 lastMoveDir;
 
     private float jumpDist;
@@ -28,14 +31,28 @@ public class PlayerMovement : MonoBehaviour
     private float jumpTime;
     public bool isJumping;
     private IEnumerator jumpCoroutine;
-
     private Vector2 jumpStartPos;
-    private Vector2 desiredPos;  
+
+    private Vector2 desiredPos;
+    private float desiredRot;
+
+    private bool lastMovingRight;
 
 	// Use this for initialization
 	void Start ()
     {
-        shadowObj.SetActive(false);
+        spriteRenderer = GetComponent<SpriteRenderer>();
+
+        shadowObjs = new List<GameObject>();
+        Transform[] allChildren = GetComponentsInChildren<Transform>();
+        foreach(Transform child in allChildren)
+        {
+            if(child.gameObject.name.Contains("Shadow"))
+            {
+                shadowObjs.Add(child.gameObject);
+                child.gameObject.SetActive(false);
+            }
+        }
 
         rb2D = GetComponent<Rigidbody2D>();
         prevVelocity = Vector2.zero;
@@ -48,6 +65,8 @@ public class PlayerMovement : MonoBehaviour
 
         isJumping = false;
         jumpCoroutine = JumpMove();
+
+        lastMovingRight = true;
     }
 
     void FixedUpdate()
@@ -60,7 +79,19 @@ public class PlayerMovement : MonoBehaviour
         {
             float horizontal = Input.GetAxis("Horizontal");
             float vertical = Input.GetAxis("Vertical");
-            Vector2 velocity = new Vector2(horizontal, vertical).normalized * speed;
+
+            if(horizontal < 0f && lastMovingRight)
+            {
+                lastMovingRight = false;
+                FlipDragonHorizontal();
+            }
+            else if(horizontal > 0 && !lastMovingRight)
+            {
+                lastMovingRight = true;
+                FlipDragonHorizontal();
+            }
+
+            Vector2 velocity = new Vector2(horizontal, vertical).normalized * moveSpeed;
             if(velocity != Vector2.zero)
             {
                 lastMoveDir = velocity.normalized;
@@ -71,6 +102,13 @@ public class PlayerMovement : MonoBehaviour
                 velocity = velocity != Vector2.zero ? velocity : prevVelocity;
             }
             rb2D.MovePosition(rb2D.position + (velocity * Time.fixedDeltaTime));
+            desiredRot = Mathf.Rad2Deg * Mathf.Acos(Vector2.Dot(Vector2.right, lastMoveDir));
+            Vector3 crossProduct = Vector3.Cross(Vector3.right, new Vector3(lastMoveDir.x, lastMoveDir.y, 0f));
+            if(crossProduct.z < 0f)
+            {
+                desiredRot *= -1;
+            }
+            rb2D.MoveRotation(Mathf.LerpAngle(rb2D.rotation, desiredRot, Time.deltaTime * rotateSpeed));
             prevVelocity = velocity;
         }    
     }
@@ -80,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space) && !isJumping)
         {
-            shadowObj.SetActive(true);
+            ActivateShadows(true);
             isJumping = true;
             jumpTime = 0f;
             jumpDist = 0f;
@@ -97,15 +135,32 @@ public class PlayerMovement : MonoBehaviour
             jumpDist += jumpMoveRate * Time.deltaTime;
 
             desiredPos = rb2D.position;
-            Debug.Log(desiredPos + "|" + lastMoveDir * jumpMoveRate * Time.deltaTime);
-            Debug.Log(lastMoveDir * jumpMoveRate * Time.deltaTime);
             desiredPos += lastMoveDir * jumpMoveRate * Time.deltaTime;
             desiredPos.y = jumpStartPos.y + jumpCurve.Evaluate(jumpDist);
-            Debug.Log(desiredPos.y);
             yield return new WaitForEndOfFrame();
         }
-        shadowObj.SetActive(false);
+        ActivateShadows(false);
         isJumping = false;
         jumpCoroutine = JumpMove();
+    }
+
+    void FlipDragonHorizontal()
+    {
+        spriteRenderer.flipY = !spriteRenderer.flipY;
+        Vector3 pos;
+        foreach (GameObject shadow in shadowObjs)
+        {
+            pos = shadow.transform.localPosition;
+            pos.y *= -1;
+            shadow.transform.localPosition = pos;
+        }
+    }
+
+    public void ActivateShadows(bool active)
+    {
+        foreach(GameObject shadow in shadowObjs)
+        {
+            shadow.SetActive(active);
+        }
     }
 }

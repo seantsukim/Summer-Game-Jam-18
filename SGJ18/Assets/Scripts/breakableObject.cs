@@ -9,9 +9,9 @@ public class breakableObject : MonoBehaviour {
 	void Start () {
 	}
 
-	public void OnTriggerEnter2D(Collider2D collided)
+	public void OnCollisionStay2D(Collision2D collided)
 	{
-		if (collided.GetComponent<PlayerMovement>().isJumping == true)
+		if (collided.gameObject.tag == "Player" && collided.gameObject.GetComponent<PlayerMovement>().isJumping == true)
 		{
 			this.GetComponent<SpriteRenderer>().sprite = newDisplay;
 			this.GetComponent<Collider2D>().enabled = false;
@@ -19,7 +19,7 @@ public class breakableObject : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
 		//change the sprite display when interact, and turn off collider
 		/* 
 		if (Input.GetMouseButtonDown(0))
@@ -27,6 +27,6 @@ public class breakableObject : MonoBehaviour {
 			this.GetComponent<SpriteRenderer>().sprite = newDisplay;
 			this.GetComponent<Collider2D>().enabled = false;
 		}
-		*/
-	}
+		
+	}*/
 }
