@@ -188,27 +188,27 @@ MonoBehaviour:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      time: -0.5734749
+      value: -0.050369263
+      inSlope: 0.14850295
+      outSlope: 0.14850295
+      tangentMode: 0
       weightedMode: 0
       inWeight: 0
-      outWeight: 0
+      outWeight: 0.088435926
     - serializedVersion: 3
-      time: 1
-      value: 1
-      inSlope: 1
-      outSlope: 1
-      tangentMode: 34
+      time: 1.332487
+      value: -0.0523384
+      inSlope: -0.24789862
+      outSlope: -0.24789862
+      tangentMode: 0
       weightedMode: 0
-      inWeight: 0
+      inWeight: 0.047620747
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  jumpDuration: 3
+  jumpDuration: 0.55
   isJumping: 0
 --- !u!212 &65871048
 SpriteRenderer:
