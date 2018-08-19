@@ -14,12 +14,13 @@ public class LevelEnd : MonoBehaviour
         if (target.tag == "Player")
         {
             GameObject wd = GameObject.FindWithTag("WallOfDoom");
+            //Debug.Log(wd);
             if (wd != null)
             {
                 GameObject.FindWithTag("WallOfDoom").SetActive(false);
             }
             //Do level end sequence
-            Debug.Log("Level End Sequence");
+            //Debug.Log("Level End Sequence");
             target.gameObject.GetComponent<PlayerMovement>().enabled = false;
 
             //coroutine = EndSequence1(target.gameObject);
