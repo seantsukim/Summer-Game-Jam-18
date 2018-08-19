@@ -3,8 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(PlayerTakeoverControl))]
 public class FanRecoverSequence : MonoBehaviour
 {
+    PlayerTakeoverControl takeoverControlRef;
+
     int playHash = Animator.StringToHash("Play");
     Animator animator;
 
@@ -13,6 +16,7 @@ public class FanRecoverSequence : MonoBehaviour
 
     void Start()
     {
+        takeoverControlRef = GetComponent<PlayerTakeoverControl>();
         animator = GetComponent<Animator>();
         allRigidbodies = GetComponentsInChildren<Rigidbody2D>();
         allColliers = GetComponentsInChildren<Collider2D>();
@@ -20,26 +24,30 @@ public class FanRecoverSequence : MonoBehaviour
 
     public void Play()
     {
-        animator.SetTrigger(playHash);
+        transform.rotation = Quaternion.identity;
         foreach(Rigidbody2D rigidbody in allRigidbodies)
         {
-            rigidbody.Sleep();
+            rigidbody.velocity = Vector2.zero;
+            rigidbody.angularVelocity = 0f;
+            rigidbody.isKinematic = true;
         }
         foreach (Collider2D collider in allColliers)
         {
             collider.enabled = false;
         }
+        animator.SetTrigger(playHash);
     }
 
     public void End()
     {
         foreach (Rigidbody2D rigidbody in allRigidbodies)
         {
-            rigidbody.WakeUp();
+            rigidbody.isKinematic = false;
         }
         foreach (Collider2D collider in allColliers)
         {
             collider.enabled = true;
         }
+        takeoverControlRef.ResumePlayerControl();
     }
 }
