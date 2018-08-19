@@ -997,7 +997,6 @@ GameObject:
   - component: {fileID: 553596011}
   - component: {fileID: 553596014}
   - component: {fileID: 553596013}
-  - component: {fileID: 553596012}
   m_Layer: 0
   m_Name: BodySegment (1)
   m_TagString: Untagged
@@ -1025,18 +1024,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &553596012
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 553596010}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f335c0320e83fc4ba1502d5c0f3b6fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  depthScalerData: {fileID: 11400000, guid: fed19af488582ca46abb689dbe7d1590, type: 2}
 --- !u!61 &553596013
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1567,7 +1554,6 @@ GameObject:
   - component: {fileID: 908703555}
   - component: {fileID: 908703554}
   - component: {fileID: 908703553}
-  - component: {fileID: 908703552}
   - component: {fileID: 908703551}
   - component: {fileID: 908703550}
   m_Layer: 0
@@ -1614,18 +1600,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.16, y: 0.16}
   m_EdgeRadius: 0
---- !u!114 &908703552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 908703549}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f335c0320e83fc4ba1502d5c0f3b6fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  depthScalerData: {fileID: 11400000, guid: fed19af488582ca46abb689dbe7d1590, type: 2}
 --- !u!114 &908703553
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1637,7 +1611,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fe5a545ecebc845b1ad5539fa6812b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 2.5
+  rotateSpeed: 5
+  moveSpeed: 1
   movementMode: 0
   jumpCurve:
     serializedVersion: 2
@@ -1664,7 +1639,6 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpDuration: 1
-  shadowObj: {fileID: 1452933075}
   isJumping: 0
 --- !u!212 &908703554
 SpriteRenderer:
@@ -2150,8 +2124,6 @@ GameObject:
   - component: {fileID: 1344622069}
   - component: {fileID: 1344622065}
   - component: {fileID: 1344622068}
-  - component: {fileID: 1344622067}
-  - component: {fileID: 1344622066}
   m_Layer: 0
   m_Name: InvisibleHead
   m_TagString: Untagged
@@ -2179,43 +2151,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!61 &1344622066
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1344622064}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0, y: 0}
-    oldSize: {x: 0, y: 0}
-    newSize: {x: 0, y: 0}
-    adaptiveTilingThreshold: 0
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 0.16, y: 0.16}
-  m_EdgeRadius: 0
---- !u!114 &1344622067
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1344622064}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f335c0320e83fc4ba1502d5c0f3b6fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  depthScalerData: {fileID: 11400000, guid: fed19af488582ca46abb689dbe7d1590, type: 2}
 --- !u!232 &1344622068
 DistanceJoint2D:
   m_ObjectHideFlags: 0
@@ -2822,7 +2757,6 @@ GameObject:
   - component: {fileID: 1775231861}
   - component: {fileID: 1775231860}
   - component: {fileID: 1775231859}
-  - component: {fileID: 1775231858}
   m_Layer: 0
   m_Name: BodySegment (2)
   m_TagString: Untagged
@@ -2843,18 +2777,6 @@ Transform:
   m_Father: {fileID: 908703556}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1775231858
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1775231856}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f335c0320e83fc4ba1502d5c0f3b6fd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  depthScalerData: {fileID: 11400000, guid: fed19af488582ca46abb689dbe7d1590, type: 2}
 --- !u!61 &1775231859
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3433,7 +3355,8 @@ Prefab:
       propertyPath: m_SpriteTilingProperty.oldSize.y
       value: 0.08
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 114537173582721628, guid: 2b5307dd346c2ef488e45d9092bdb058, type: 2}
   m_SourcePrefab: {fileID: 100100000, guid: 2b5307dd346c2ef488e45d9092bdb058, type: 2}
   m_IsPrefabAsset: 0
 --- !u!50 &1980815171 stripped
