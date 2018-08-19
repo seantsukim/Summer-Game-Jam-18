@@ -11,6 +11,8 @@ public class Vent : MonoBehaviour
     public Component[] playerSprites;
     public Component[] playerColliders;
 
+    //private AudioSource ventSound;
+
     GameObject wallOfDoom;
 
     void Start()
@@ -29,6 +31,14 @@ public class Vent : MonoBehaviour
         //Checks if the wall of doom has passed the partner vent
         if (wallOfDoom == null || wallOfDoom.transform.position.x < partnerVent.transform.position.x)
         {
+            if (gameObject.GetComponent<AudioSource>() != null)
+            {
+                gameObject.GetComponent<AudioSource>().Play();
+            }
+            else
+            {
+                Debug.Log("Attach AudioSource with Vent sound to vent");
+            }
             StartCoroutine(PanCameraBetweenPositions(gameObject.transform.position, partnerVent.transform.position));
         }
         else
