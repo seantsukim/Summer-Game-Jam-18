@@ -6,6 +6,6 @@ using UnityEngine;
 public class DepthScalerData : ScriptableObject
 {
     public AnimationCurve depthScaleCurve;
-    public float frontPlanePixelHeight;
-    public float backPlanePixelHeight;
+    public float frontPlaneWorldY;
+    public float backPlaneWorldY;
 }
