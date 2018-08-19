@@ -17,7 +17,10 @@ public class WeakSpot : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        robotRef.Damage();
+        if(collision.gameObject.CompareTag("Player") && collision.gameObject.GetComponent<PlayerMovement>().isJumping)
+        {
+            robotRef.Damage();
+        }   
     }
 
     public void SetWeakSpotActive(bool isActive)

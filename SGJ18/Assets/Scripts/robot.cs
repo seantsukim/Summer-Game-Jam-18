@@ -7,7 +7,6 @@ public class robot : MonoBehaviour {
 	//using enum to hold the robot's current state
 	public enum robotAction
 	{
-		sleep,
 		idle,
 		missile,
 		swing,
@@ -29,11 +28,8 @@ public class robot : MonoBehaviour {
 	//missile speed
 	public int missileSpeed = 25;
 
-	//hitbox that will turn on and off during fight
-	public Collider2D weakspot;
-
 	//tracks time in between attacks
-	public float time;
+	private float time;
 
 	//keep track of what the robot is currently doing
 	private robotAction currentState;
@@ -42,6 +38,8 @@ public class robot : MonoBehaviour {
 	//make sure we dont spam missiles on accident
 	private bool isMissileCooldown;
 
+    private WeakSpot weakSpot;
+
     private Animator anim;
     int swingHash = Animator.StringToHash("Swing");
     int DamageHash = Animator.StringToHash("Damage");
@@ -49,26 +47,59 @@ public class robot : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		currentState = robotAction.idle;
-		weakspot.enabled = false;
 		isFacingLeft = true;
 		isMissileCooldown = false;
 		time = 0;
+
+        weakSpot = GetComponentInChildren<WeakSpot>();
+
         anim = GetComponent<Animator>();
 	}
 
-	//points in direction of the player when idle
-	void eyesOnPlayer()
+    // Update is called once per frame
+    void Update()
+    {
+        //finite state machine, tracks state of robot
+        switch (currentState)
+        {
+            case robotAction.idle:
+                eyesOnPlayer();
+                break;
+            case robotAction.missile:
+                fireMissile();
+                break;
+            case robotAction.swing:
+                heavySwing();
+                break;
+            case robotAction.terminated:
+                //DIE
+                break;
+        }
+    }
+
+    //points in direction of the player when idle
+    void eyesOnPlayer()
 	{
 		//face left
 		if(player.transform.position.x < this.transform.position.x)
 		{
-			this.transform.localScale = new Vector3(-1, 1, 1);
+            Vector3 scale = transform.localScale;
+            if(scale.x >= 0f)
+            {
+                scale.x *= -1;
+            }
+            transform.localScale = scale;
 			isFacingLeft = true;
 		}
 		//face right
 		else
 		{
-			this.transform.localScale = new Vector3(1, 1, 1);
+            Vector3 scale = transform.localScale;
+            if (scale.x < 0f)
+            {
+                scale.x *= -1;
+            }
+			transform.localScale = scale;
 			isFacingLeft = false;
 		}
 		
@@ -115,55 +146,34 @@ public class robot : MonoBehaviour {
 	//prepares to land a huge swing
 	void heavySwing()
 	{
-		weakspot.enabled = true;
-        /*
-		insert animation code here
-		*/
+        weakSpot.SetWeakSpotActive(true);
         anim.SetTrigger(swingHash);
-
-		//reset state back to square one
-		weakspot.enabled = false;
-		isMissileCooldown = false;
-		time = 0;
-		currentState = robotAction.idle;
-
 	}
 
-	//RIP Robot
-	void terminated()
-	{
-		
-	}
+    public void EndHeavySwing()
+    {
+        weakSpot.SetWeakSpotActive(false);
+        isMissileCooldown = false;
+        time = 0;
+        currentState = robotAction.idle;
+    }
 
-	// Update is called once per frame
-	void Update () {
-		//finite state machine, tracks state of robot
-		switch(currentState)
-		{
-			case robotAction.idle:
-				eyesOnPlayer();
-				break;
-			case robotAction.missile:
-				fireMissile();
-				break;
-			case robotAction.swing:
-				heavySwing();
-				break;
-			case robotAction.terminated:
-				//DIE
-				break;
-		}
+    public void Damage()
+    {
+        health -= 1;
+        if(health <= 0)
+        {
+            Die();
+        }
+        else
+        {
+            anim.SetTrigger(DamageHash);
+            Debug.Log("OW");
+        }
+    }
 
-		/*
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			fireMissile();
-			weakspot.enabled = !weakspot.enabled;
-			//Debug.Log("State: " + weakspot.enabled);
-			//Debug.Log("Is Left: " + isFacingLeft); // 1 if left, 0 if right
-		}
-		eyesOnPlayer();
-		*/
-		
-	}
+    void Die()
+    {
+        Debug.Log("BLEH");
+    }
 }
