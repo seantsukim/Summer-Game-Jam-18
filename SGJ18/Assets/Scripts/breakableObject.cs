@@ -19,7 +19,7 @@ public class breakableObject : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
+	/*void Update () {
 		//change the sprite display when interact, and turn off collider
 		/* 
 		if (Input.GetMouseButtonDown(0))
@@ -28,5 +28,5 @@ public class breakableObject : MonoBehaviour {
 			this.GetComponent<Collider2D>().enabled = false;
 		}
 		*/
-	}
+	}*/
 }
