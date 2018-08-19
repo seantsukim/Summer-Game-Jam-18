@@ -9,9 +9,9 @@ public class breakableObject : MonoBehaviour {
 	void Start () {
 	}
 
-	public void OnTriggerEnter2D(Collider2D collided)
+	public void OnCollisionEnter2D(Collision2D collided)
 	{
-		if (collided.GetComponent<PlayerMovement>().isJumping == true)
+		if (collided.gameObject.tag == "Player" && collided.gameObject.GetComponent<PlayerMovement>().isJumping == true)
 		{
 			this.GetComponent<SpriteRenderer>().sprite = newDisplay;
 			this.GetComponent<Collider2D>().enabled = false;
