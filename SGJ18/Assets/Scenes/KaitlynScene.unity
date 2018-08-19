@@ -347,7 +347,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotateSpeed: 5
-  moveSpeed: 2.2
+  moveSpeed: 3
   movementMode: 0
   jumpCurve:
     serializedVersion: 2
@@ -1193,7 +1193,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da8b7ba494685df46b15413fe58ddf25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  wallVelocity: 1.8
+  wallVelocity: 2.3
 --- !u!1001 &849538467
 Prefab:
   m_ObjectHideFlags: 0
