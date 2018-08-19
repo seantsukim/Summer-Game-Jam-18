@@ -29,6 +29,7 @@ public class Interactable : MonoBehaviour
             inRange = true;
             //Debug.Log("Entering radius of " + gameObject.name);
             //Have Key Prompt appear
+            gameObject.transform.GetChild(0).gameObject.active = true;
         }
     }
 
@@ -40,6 +41,7 @@ public class Interactable : MonoBehaviour
             inRange = false;
             //Debug.Log("Exiting radius" + gameObject.name);
             //Have Key prompt disappear
+            gameObject.transform.GetChild(0).gameObject.active = false;
         }
     }
 }
