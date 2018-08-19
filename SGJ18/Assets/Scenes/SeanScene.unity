@@ -122,11 +122,10 @@ GameObject:
   m_Component:
   - component: {fileID: 471907228}
   - component: {fileID: 471907227}
-  - component: {fileID: 471907231}
   - component: {fileID: 471907229}
   - component: {fileID: 471907230}
   m_Layer: 0
-  m_Name: after
+  m_Name: '"PLayer"'
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,28 +235,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &471907231
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 471907226}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f5fe5a545ecebc845b1ad5539fa6812b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 0
-  movementMode: 0
-  jumpCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  jumpDuration: 0
-  shadowObj: {fileID: 1229965856}
-  isJumping: 0
 --- !u!1 &983955354
 GameObject:
   m_ObjectHideFlags: 0
@@ -342,7 +319,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1030333183}
   - component: {fileID: 1030333182}
-  - component: {fileID: 1030333181}
   - component: {fileID: 1030333184}
   - component: {fileID: 1030333180}
   - component: {fileID: 1030333179}
@@ -399,18 +375,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 5.12, y: 5.12}
   m_EdgeRadius: 0
---- !u!114 &1030333181
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1030333178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d2bdd07838027b4081aa916045cafeb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  newDisplay: {fileID: 21300000, guid: b821650f8ba271945a0c9c6e7aac93a0, type: 3}
 --- !u!212 &1030333182
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -464,7 +428,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1030333178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.74, y: 0.59, z: 0}
+  m_LocalPosition: {x: -0.19, y: 0.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -476,13 +440,13 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1030333178}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 49ca11e80299fbe4e85fc6de0dd73b3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 471907226}
-  health: 0
+  health: 2
   weakspot: {fileID: 1030333180}
 --- !u!95 &1030333185
 Animator:
@@ -672,7 +636,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1506170815}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.41, y: -3.88, z: -0.115234375}
+  m_LocalPosition: {x: -0.41, y: -4.72, z: -0.115234375}
   m_LocalScale: {x: 3.944696, y: -1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
