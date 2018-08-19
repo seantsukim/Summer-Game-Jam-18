@@ -27,6 +27,6 @@ public class breakableObject : MonoBehaviour {
 			this.GetComponent<SpriteRenderer>().sprite = newDisplay;
 			this.GetComponent<Collider2D>().enabled = false;
 		}
-		*/
+		
 	}*/
 }
