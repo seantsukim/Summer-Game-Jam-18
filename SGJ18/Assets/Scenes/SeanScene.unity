@@ -338,7 +338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d2bdd07838027b4081aa916045cafeb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newDisplay: {fileID: 21300000, guid: c9cb9d0f397dbf149bd31eb46787f2a3, type: 3}
+  newDisplay: {fileID: 21300000, guid: b821650f8ba271945a0c9c6e7aac93a0, type: 3}
 --- !u!212 &1030333182
 SpriteRenderer:
   m_ObjectHideFlags: 0
