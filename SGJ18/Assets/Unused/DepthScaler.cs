@@ -16,9 +16,8 @@ public class DepthScaler : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        Vector3 screenPoint = Camera.main.WorldToScreenPoint(transform.position);
-        screenPoint.y = Mathf.Clamp(screenPoint.y, depthScalerData.frontPlanePixelHeight, depthScalerData.backPlanePixelHeight);
-        float frac = (screenPoint.y - depthScalerData.frontPlanePixelHeight) / (depthScalerData.backPlanePixelHeight - depthScalerData.frontPlanePixelHeight);
+        float clampedY = Mathf.Clamp(transform.position.y, depthScalerData.frontPlaneWorldY, depthScalerData.backPlaneWorldY);
+        float frac = (clampedY - depthScalerData.frontPlaneWorldY) / (depthScalerData.backPlaneWorldY - depthScalerData.frontPlaneWorldY);
         float scaleFactor = depthScalerData.depthScaleCurve.Evaluate(frac);
         transform.localScale = originalScale * scaleFactor;
 	}
