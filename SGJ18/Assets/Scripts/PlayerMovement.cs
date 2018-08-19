@@ -29,7 +29,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpDist;
     private float jumpMoveRate;
     private float jumpTime;
-    private bool isJumping;
+    public bool isJumping;
     private IEnumerator jumpCoroutine;
     private Vector2 jumpStartPos;
 
