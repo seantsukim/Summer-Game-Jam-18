@@ -41,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     private bool inWindZone;
     private Vector2 wind;
 
+    private bool playerInControl;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -72,6 +74,8 @@ public class PlayerMovement : MonoBehaviour
         lastMovingRight = true;
 
         inWindZone = false;
+
+        playerInControl = true;
     }
 
     void FixedUpdate()
@@ -86,44 +90,47 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            float horizontal = Input.GetAxis("Horizontal");
-            float vertical = Input.GetAxis("Vertical");
+            if(playerInControl)
+            {
+                float horizontal = Input.GetAxis("Horizontal");
+                float vertical = Input.GetAxis("Vertical");
 
-            if(horizontal < 0f && lastMovingRight)
-            {
-                lastMovingRight = false;
-                FlipDragonHorizontal();
-            }
-            else if(horizontal > 0 && !lastMovingRight)
-            {
-                lastMovingRight = true;
-                FlipDragonHorizontal();
-            }
+                if (horizontal < 0f && lastMovingRight)
+                {
+                    lastMovingRight = false;
+                    FlipDragonHorizontal();
+                }
+                else if (horizontal > 0 && !lastMovingRight)
+                {
+                    lastMovingRight = true;
+                    FlipDragonHorizontal();
+                }
 
-            Vector2 velocity = new Vector2(horizontal, vertical).normalized * moveSpeed;
-            if(velocity != Vector2.zero)
-            {
-                lastMoveDir = velocity.normalized;
-            }
+                Vector2 velocity = new Vector2(horizontal, vertical).normalized * moveSpeed;
+                if (velocity != Vector2.zero)
+                {
+                    lastMoveDir = velocity.normalized;
+                }
 
-            if (movementMode == MovementMode.CONTINUOUS)
-            {
-                velocity = velocity != Vector2.zero ? velocity : prevVelocity;
-            }
-            Vector2 newPos = rb2D.position + velocity * Time.fixedDeltaTime;
-            if(inWindZone)
-            {
-                newPos += wind;
-            }
-            rb2D.MovePosition(newPos);
-            desiredRot = Mathf.Rad2Deg * Mathf.Acos(Vector2.Dot(Vector2.right, lastMoveDir));
-            Vector3 crossProduct = Vector3.Cross(Vector3.right, new Vector3(lastMoveDir.x, lastMoveDir.y, 0f));
-            if(crossProduct.z < 0f)
-            {
-                desiredRot *= -1;
-            }
-            rb2D.MoveRotation(Mathf.LerpAngle(rb2D.rotation, desiredRot, Time.deltaTime * rotateSpeed));
-            prevVelocity = velocity;
+                if (movementMode == MovementMode.CONTINUOUS)
+                {
+                    velocity = velocity != Vector2.zero ? velocity : prevVelocity;
+                }
+                Vector2 newPos = rb2D.position + velocity * Time.fixedDeltaTime;
+                if (inWindZone)
+                {
+                    newPos += wind;
+                }
+                rb2D.MovePosition(newPos);
+                desiredRot = Mathf.Rad2Deg * Mathf.Acos(Vector2.Dot(Vector2.right, lastMoveDir));
+                Vector3 crossProduct = Vector3.Cross(Vector3.right, new Vector3(lastMoveDir.x, lastMoveDir.y, 0f));
+                if (crossProduct.z < 0f)
+                {
+                    desiredRot *= -1;
+                }
+                rb2D.MoveRotation(Mathf.LerpAngle(rb2D.rotation, desiredRot, Time.deltaTime * rotateSpeed));
+                prevVelocity = velocity;
+            }           
         }    
     }
 
@@ -187,5 +194,10 @@ public class PlayerMovement : MonoBehaviour
     public void ExitWindZone()
     {
         inWindZone = false;
+    }
+
+    public void AllowPlayerControl(bool canControl)
+    {
+        playerInControl = canControl;
     }
 }
