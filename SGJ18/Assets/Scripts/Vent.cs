@@ -27,7 +27,7 @@ public class Vent : MonoBehaviour
         Vector3 playerPos = GameObject.FindWithTag("Player").transform.position;
 
         //Checks if the wall of doom has passed the partner vent
-        if (wallOfDoom.transform.position.x < partnerVent.transform.position.x)
+        if (wallOfDoom == null || wallOfDoom.transform.position.x < partnerVent.transform.position.x)
         {
             StartCoroutine(PanCameraBetweenPositions(gameObject.transform.position, partnerVent.transform.position));
         }
@@ -69,11 +69,24 @@ public class Vent : MonoBehaviour
         {
             s.enabled = true;
         }
+        p.transform.position = partnerVent.transform.position;
+
+        int x = 0;
+        while (x < 6)
+        {
+            //yield return new WaitForSeconds(0.0125F);
+            //float percent = i / distance;
+            //p.transform.position = Vector3.Lerp(start, finish, percent) + new Vector3(0, 0, -10);
+            //i += 0.25F;
+            yield return new WaitForSeconds(0.0125F);
+            p.transform.position += new Vector3(0, -0.25F, 0);
+            x++;
+        }
+        //p.transform.position = partnerVent.transform.position + new Vector3 (0, -1.5F, 0);
+
         foreach (BoxCollider2D b in playerColliders)
         {
             b.enabled = true;
         }
-
-        p.transform.position = partnerVent.transform.position;
     }
 }
