@@ -346,8 +346,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5fe5a545ecebc845b1ad5539fa6812b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 0
-  moveSpeed: 0
+  rotateSpeed: 5
+  moveSpeed: 2.2
   movementMode: 0
   jumpCurve:
     serializedVersion: 2
@@ -725,6 +725,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   endPosition: {fileID: 1881750274}
+  nextLevel: Level2
 --- !u!61 &343140781
 BoxCollider2D:
   m_ObjectHideFlags: 0

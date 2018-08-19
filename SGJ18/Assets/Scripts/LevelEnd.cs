@@ -9,6 +9,8 @@ public class LevelEnd : MonoBehaviour
 
     private IEnumerator coroutine;
 
+    public string nextLevel;
+
 	void OnTriggerEnter2D (Collider2D target)
     {
         if (target.tag == "Player")
@@ -64,6 +66,6 @@ public class LevelEnd : MonoBehaviour
             }
             x++;
         }
-        //SceneManager.LoadScene(???);
+        //SceneManager.LoadScene(nextLevel);
     }
 }
