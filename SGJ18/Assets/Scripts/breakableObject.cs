@@ -11,11 +11,10 @@ public class breakableObject : MonoBehaviour {
 
 	public void OnTriggerEnter2D(Collider2D collided)
 	{
-		if (collided.gameObject.tag == "Player")
+		if (collided.GetComponent<PlayerMovement>().isJumping == true)
 		{
 			this.GetComponent<SpriteRenderer>().sprite = newDisplay;
 			this.GetComponent<Collider2D>().enabled = false;
-			Debug.Log(2222);
 		}
 	}
 	
