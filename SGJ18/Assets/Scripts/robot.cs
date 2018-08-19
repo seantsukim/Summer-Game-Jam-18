@@ -44,7 +44,7 @@ public class robot : MonoBehaviour {
 	
 	//preps up barrage of bullets
 	void fireBarrage()
-	{
+	{/*code still in progress based on the design of boss level */
 		//if robot is facing the left, barrage left
 		if (this.transform.localScale.x == -1)
 		{
@@ -66,7 +66,7 @@ public class robot : MonoBehaviour {
 	//RIP Robot
 	void terminated()
 	{
-		
+
 	}
 
 	// Update is called once per frame
