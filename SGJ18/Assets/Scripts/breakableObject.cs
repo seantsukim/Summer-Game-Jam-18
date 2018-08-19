@@ -9,7 +9,7 @@ public class breakableObject : MonoBehaviour {
 	void Start () {
 	}
 
-	public void OnCollisionEnter2D(Collision2D collided)
+	public void OnCollisionStay2D(Collision2D collided)
 	{
 		if (collided.gameObject.tag == "Player" && collided.gameObject.GetComponent<PlayerMovement>().isJumping == true)
 		{
