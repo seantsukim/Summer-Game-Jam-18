@@ -282,7 +282,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!95 &428341404
 Animator:
   serializedVersion: 3
@@ -372,6 +372,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7378ed4cb8a38fe40880e455b8bf5294, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shadowObj: {fileID: 1194418433}
+  jumpAnimation: {fileID: 7400000, guid: 265bc7fbf0a15af4a8bd739dad4bc1a9, type: 2}
+  jumpDist: 1
 --- !u!1 &479588887
 GameObject:
   m_ObjectHideFlags: 0
@@ -545,7 +548,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &680153319
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -631,6 +634,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpDuration: 0.75
+  isJumping: 0
 --- !u!212 &680153323
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1002,6 +1006,7 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   jumpDuration: 0
+  isJumping: 0
 --- !u!114 &843494474
 MonoBehaviour:
   m_ObjectHideFlags: 0
