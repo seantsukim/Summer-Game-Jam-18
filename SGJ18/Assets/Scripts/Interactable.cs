@@ -16,7 +16,7 @@ public class Interactable : MonoBehaviour
         if (inRange && Input.GetKeyDown(keyTrigger))
         {
             //Perform task
-            Debug.Log(keyTrigger + " pressed");
+            //Debug.Log(keyTrigger + " pressed");
             SendMessage(methodName);
         }
     }
