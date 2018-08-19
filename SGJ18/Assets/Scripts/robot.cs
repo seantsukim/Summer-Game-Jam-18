@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Animator))]
 public class robot : MonoBehaviour {
 	//using enum to hold the robot's current state
 	public enum robotAction
@@ -41,6 +42,10 @@ public class robot : MonoBehaviour {
 	//make sure we dont spam missiles on accident
 	private bool isMissileCooldown;
 
+    private Animator anim;
+    int swingHash = Animator.StringToHash("Swing");
+    int DamageHash = Animator.StringToHash("Damage");
+
 	// Use this for initialization
 	void Start () {
 		currentState = robotAction.idle;
@@ -48,6 +53,7 @@ public class robot : MonoBehaviour {
 		isFacingLeft = true;
 		isMissileCooldown = false;
 		time = 0;
+        anim = GetComponent<Animator>();
 	}
 
 	//points in direction of the player when idle
@@ -66,8 +72,7 @@ public class robot : MonoBehaviour {
 			isFacingLeft = false;
 		}
 		
-		time += Time.deltaTime * 1;
-		Debug.Log(time);
+		time += Time.deltaTime;
 
 		//time to do the swinging animation
 		if (time >= 8)
@@ -103,11 +108,6 @@ public class robot : MonoBehaviour {
 			isMissileCooldown = true;
 		}
 
-		else
-		{
-			//we've fired a missle already in this rotation
-		}
-
 		//reset back to idle state
 		currentState = robotAction.idle;
 	}
@@ -116,9 +116,10 @@ public class robot : MonoBehaviour {
 	void heavySwing()
 	{
 		weakspot.enabled = true;
-		/*
+        /*
 		insert animation code here
 		*/
+        anim.SetTrigger(swingHash);
 
 		//reset state back to square one
 		weakspot.enabled = false;
