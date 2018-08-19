@@ -29,7 +29,7 @@ public class Vent : MonoBehaviour
         Vector3 playerPos = GameObject.FindWithTag("Player").transform.position;
 
         //Checks if the wall of doom has passed the partner vent
-        if (wallOfDoom == null || wallOfDoom.transform.position.x < partnerVent.transform.position.x)
+        if (true)
         {
             if (gameObject.GetComponent<AudioSource>() != null)
             {
