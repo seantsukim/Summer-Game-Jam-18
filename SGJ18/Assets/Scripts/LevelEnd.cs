@@ -16,7 +16,7 @@ public class LevelEnd : MonoBehaviour
             GameObject wd = GameObject.FindWithTag("WallOfDoom");
             if (wd != null)
             {
-                GameObject.FindWithTag("WallOfDoom").active = false;
+                GameObject.FindWithTag("WallOfDoom").SetActive(false);
             }
             //Do level end sequence
             Debug.Log("Level End Sequence");
@@ -50,7 +50,7 @@ public class LevelEnd : MonoBehaviour
 
         //Hops up and down
         int x = 0;
-        while (x < 100)
+        while (x < 150)
         {
             yield return new WaitForSeconds(0.0125F);
             if (x % 16 > 7)
