@@ -38,6 +38,9 @@ public class PlayerMovement : MonoBehaviour
 
     private bool lastMovingRight;
 
+    private bool inWindZone;
+    private Vector2 wind;
+
 	// Use this for initialization
 	void Start ()
     {
@@ -67,12 +70,18 @@ public class PlayerMovement : MonoBehaviour
         jumpCoroutine = JumpMove();
 
         lastMovingRight = true;
+
+        inWindZone = false;
     }
 
     void FixedUpdate()
     {
         if(isJumping)
         {
+            if(inWindZone)
+            {
+                desiredPos += wind;
+            }
             rb2D.MovePosition(desiredPos);
         }
         else
@@ -101,7 +110,12 @@ public class PlayerMovement : MonoBehaviour
             {
                 velocity = velocity != Vector2.zero ? velocity : prevVelocity;
             }
-            rb2D.MovePosition(rb2D.position + (velocity * Time.fixedDeltaTime));
+            Vector2 newPos = rb2D.position + velocity * Time.fixedDeltaTime;
+            if(inWindZone)
+            {
+                newPos += wind;
+            }
+            rb2D.MovePosition(newPos);
             desiredRot = Mathf.Rad2Deg * Mathf.Acos(Vector2.Dot(Vector2.right, lastMoveDir));
             Vector3 crossProduct = Vector3.Cross(Vector3.right, new Vector3(lastMoveDir.x, lastMoveDir.y, 0f));
             if(crossProduct.z < 0f)
@@ -162,5 +176,16 @@ public class PlayerMovement : MonoBehaviour
         {
             shadow.SetActive(active);
         }
+    }
+
+    public void SetInWindZone(Vector2 inWind)
+    {
+        wind = inWind;
+        inWindZone = true;
+    }
+
+    public void ExitWindZone()
+    {
+        inWindZone = false;
     }
 }
