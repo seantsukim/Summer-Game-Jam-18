@@ -15,13 +15,16 @@ public class robot : MonoBehaviour {
 	//player object is here to pull variables from
 	public GameObject player;
 	//this gameObjects health
-	public int health;
+	public int health = 2;
+	//hitbox that will turn on and off during fight
+	public Collider2D weakspot;
 	//keep track of what the robot is currently doing
 	private robotAction currentState;
 
 	// Use this for initialization
 	void Start () {
 		currentState = robotAction.idle;
+		weakspot.enabled = false;
 	}
 
 	//points in direction of the player
@@ -42,20 +45,30 @@ public class robot : MonoBehaviour {
 	//preps up barrage of bullets
 	void fireBarrage()
 	{
+		//if robot is facing the left, barrage left
+		if (this.transform.localScale.x == -1)
+		{
+			
+		}
 
+		//if the robot is facing right, barrage right
+		{
+
+		}
 	}
 
 	//prepares to land a huge swing
 	void heavySwing()
 	{
-
+		weakspot.enabled = true;
 	}
 
 	//RIP Robot
 	void terminated()
 	{
-
+		
 	}
+
 	// Update is called once per frame
 	void Update () {
 		/* 
@@ -75,7 +88,11 @@ public class robot : MonoBehaviour {
 				break;
 		}
 		*/
-
+		if (Input.GetKeyDown(KeyCode.Space))
+		{
+			weakspot.enabled = !weakspot.enabled;
+			Debug.Log("State: " + weakspot.enabled);
+		}
 		eyesOnPlayer();
 	}
 }
