@@ -20,7 +20,7 @@ public class PlayerMovement : MonoBehaviour
 
     private List<GameObject> shadowObjs;
 
-    private SpriteRenderer spriteRenderer;
+    private SpriteRenderer[] allPiecesRenderers;
 
     private Rigidbody2D rb2D;
     private Vector2 prevVelocity;
@@ -46,7 +46,7 @@ public class PlayerMovement : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        allPiecesRenderers = GetComponentsInChildren<SpriteRenderer>();
 
         shadowObjs = new List<GameObject>();
         Transform[] allChildren = GetComponentsInChildren<Transform>();
@@ -167,7 +167,10 @@ public class PlayerMovement : MonoBehaviour
 
     void FlipDragonHorizontal()
     {
-        spriteRenderer.flipY = !spriteRenderer.flipY;
+        foreach(SpriteRenderer renderer in allPiecesRenderers)
+        {
+            renderer.flipY = !renderer.flipY;
+        }
         Vector3 pos;
         foreach (GameObject shadow in shadowObjs)
         {
