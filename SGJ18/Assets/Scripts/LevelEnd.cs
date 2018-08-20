@@ -66,6 +66,6 @@ public class LevelEnd : MonoBehaviour
             }
             x++;
         }
-        //SceneManager.LoadScene(nextLevel);
+        SceneManager.LoadScene(nextLevel);
     }
 }
